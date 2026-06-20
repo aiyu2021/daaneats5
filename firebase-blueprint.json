@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile with role details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "restaurant", "driver", "admin"] },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "role"]
+    },
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "Restaurant offering food delivery services",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "cuisine": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "rating": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "name", "cuisine", "address", "isActive"]
+    },
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "Individual food or drink dynamic item from a restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "isAvailable": { "type": "boolean" }
+      },
+      "required": ["id", "name", "price", "isAvailable"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer food delivery order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "restaurantName": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "preparing", "delivering", "completed", "cancelled"] },
+        "createdAt": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "notes": { "type": "string" },
+        "driverId": { "type": "string" },
+        "driverName": { "type": "string" }
+      },
+      "required": ["id", "customerId", "restaurantId", "items", "totalAmount", "status", "deliveryAddress", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles and credentials"
+    },
+    "restaurants/{restaurantId}": {
+      "schema": { "$ref": "#/entities/Restaurant" },
+      "description": "Active and inactive restaurants list"
+    },
+    "restaurants/{restaurantId}/menuItems/{menuItemId}": {
+      "schema": { "$ref": "#/entities/MenuItem" },
+      "description": "Individual food and drinks item menu per restaurant"
+    },
+    "orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "DaanEats platform orders"
+    }
+  }
+}
