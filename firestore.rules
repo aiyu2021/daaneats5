@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Enable full read and write access for a seamless demonstrative mockup experience
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    match /restaurants/{restaurantId} {
+      allow read, write: if true;
+      
+      match /menuItems/{menuItemId} {
+        allow read, write: if true;
+      }
+    }
+
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+  }
+}
