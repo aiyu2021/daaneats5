@@ -1,0 +1,6 @@
+{
+  "name": "DaanEats",
+  "description": "DaanEats is a dynamic food delivery and ordering platform for the Daan area, featuring multi-restaurant menus, interactive cart checkout, real-time order tracking and status updates, and a comprehensive backend dashboard for restaurant, menu, and order administration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
